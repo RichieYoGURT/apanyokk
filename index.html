@@ -33,12 +33,10 @@ body{
 }
 
 .hidden{
-    display:none !important;
+    display:none;
 }
 
-/* ====================
-   PIN PAGE
-==================== */
+/* PIN PAGE */
 
 .trex-wrapper{
     display:flex;
@@ -48,10 +46,11 @@ body{
 
 .trex-gif{
     width:220px;
-    animation:trexFloat 2s ease-in-out infinite;
+    max-width:100%;
+    animation:floatTrex 2s ease-in-out infinite;
 }
 
-@keyframes trexFloat{
+@keyframes floatTrex{
     0%,100%{transform:translateY(0);}
     50%{transform:translateY(-12px);}
 }
@@ -60,8 +59,8 @@ body{
     color:#234c9f;
     font-size:24px;
     font-weight:700;
-    margin-bottom:25px;
     line-height:1.4;
+    margin-bottom:25px;
 }
 
 .pin-box{
@@ -107,11 +106,10 @@ body{
 .clue{
     margin-top:25px;
     color:#7f89b6;
+    font-size:18px;
 }
 
-/* ====================
-   HI PAGE
-==================== */
+/* HI PAGE */
 
 #hiPage{
     min-height:100vh;
@@ -121,7 +119,10 @@ body{
 }
 
 .hi-wrapper{
-    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 }
 
 .hi-gif{
@@ -145,8 +146,8 @@ body{
     padding:18px 70px;
     border-radius:50px;
     cursor:pointer;
-    transition:.25s;
     box-shadow:0 6px 18px rgba(24,71,183,.3);
+    transition:.25s;
 }
 
 .tap-btn:hover{
@@ -157,9 +158,7 @@ body{
     transform:scale(.90);
 }
 
-/* ====================
-   ANIMATION
-==================== */
+/* FADE */
 
 .fade-in{
     animation:fadeIn .8s ease forwards;
@@ -189,9 +188,7 @@ body{
     }
 }
 
-/* ====================
-   BIRTHDAY PAGE
-==================== */
+/* BIRTHDAY PAGE */
 
 .cake{
     font-size:100px;
@@ -218,9 +215,7 @@ body{
     font-size:18px;
 }
 
-/* ====================
-   CONFETTI
-==================== */
+/* CONFETTI */
 
 .confetti{
     position:fixed;
@@ -307,8 +302,7 @@ body{
                 hi, how are you 👋🏻
             </h1>
 
-            <button
-            class="tap-btn"
+            <button class="tap-btn"
             onclick="openBirthday()">
                 tap disinii
             </button>
@@ -349,14 +343,6 @@ body{
 
 const correctPin = "260710";
 let inputPin = "";
-let wrongAttempt = 0;
-
-const messages = [
-    "APAA HAYOO 😑",
-    "ngetik yg bener cil",
-    "😏",
-    "Lio bilek : 😡"
-];
 
 function updateDots(){
 
@@ -401,13 +387,7 @@ function addNumber(num){
 
             }else{
 
-                alert(messages[wrongAttempt]);
-
-                wrongAttempt++;
-
-                if(wrongAttempt >= messages.length){
-                    wrongAttempt = 0;
-                }
+                alert("PIN salah 😝");
 
                 inputPin = "";
                 updateDots();
