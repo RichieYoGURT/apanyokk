@@ -405,11 +405,23 @@ function addNumber(num){
 
             }else{
 
-                alert("APA HAYOOOO");
+                const messages = [
+    "APAA HAYOO 😑",
+    "ngetik yg bener cil",
+    "😏",
+    "Lio bilek : 😡"
+];
 
-                inputPin = "";
+alert(messages[wrongAttempt]);
 
-                updateDots();
+wrongAttempt++;
+
+if(wrongAttempt >= messages.length){
+    wrongAttempt = 0;
+}
+
+inputPin = "";
+updateDots();
 
             }
 
