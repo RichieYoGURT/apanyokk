@@ -32,9 +32,13 @@ body{
     text-align:center;
 }
 
-/* ======================
+.hidden{
+    display:none !important;
+}
+
+/* ====================
    PIN PAGE
-====================== */
+==================== */
 
 .trex-wrapper{
     display:flex;
@@ -44,25 +48,20 @@ body{
 
 .trex-gif{
     width:220px;
-    max-width:100%;
     animation:trexFloat 2s ease-in-out infinite;
 }
 
 @keyframes trexFloat{
-    0%,100%{
-        transform:translateY(0);
-    }
-    50%{
-        transform:translateY(-12px);
-    }
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-12px);}
 }
 
 .title{
     color:#234c9f;
     font-size:24px;
     font-weight:700;
-    line-height:1.4;
     margin-bottom:25px;
+    line-height:1.4;
 }
 
 .pin-box{
@@ -108,16 +107,11 @@ body{
 .clue{
     margin-top:25px;
     color:#7f89b6;
-    font-size:18px;
 }
 
-.hidden{
-    display:none !important;
-}
-
-/* ======================
+/* ====================
    HI PAGE
-====================== */
+==================== */
 
 #hiPage{
     min-height:100vh;
@@ -127,15 +121,11 @@ body{
 }
 
 .hi-wrapper{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+    text-align:center;
 }
 
 .hi-gif{
     width:220px;
-    height:auto;
     margin-bottom:25px;
 }
 
@@ -155,8 +145,8 @@ body{
     padding:18px 70px;
     border-radius:50px;
     cursor:pointer;
-    box-shadow:0 6px 18px rgba(24,71,183,.3);
     transition:.25s;
+    box-shadow:0 6px 18px rgba(24,71,183,.3);
 }
 
 .tap-btn:hover{
@@ -167,19 +157,19 @@ body{
     transform:scale(.90);
 }
 
-/* ======================
-   FADE
-====================== */
+/* ====================
+   ANIMATION
+==================== */
 
 .fade-in{
-    animation:fadeInPage .8s ease forwards;
+    animation:fadeIn .8s ease forwards;
 }
 
 .fade-out{
-    animation:fadeOutPage .5s ease forwards;
+    animation:fadeOut .5s ease forwards;
 }
 
-@keyframes fadeInPage{
+@keyframes fadeIn{
     from{
         opacity:0;
         transform:translateY(20px);
@@ -190,24 +180,18 @@ body{
     }
 }
 
-@keyframes fadeOutPage{
+@keyframes fadeOut{
     from{
         opacity:1;
-        transform:translateY(0);
     }
     to{
         opacity:0;
-        transform:translateY(-20px);
     }
 }
 
-/* ======================
+/* ====================
    BIRTHDAY PAGE
-====================== */
-
-.birthday{
-    animation:fadeInPage .8s ease;
-}
+==================== */
 
 .cake{
     font-size:100px;
@@ -232,12 +216,11 @@ body{
     color:#555;
     line-height:1.8;
     font-size:18px;
-    padding:0 10px;
 }
 
-/* ======================
+/* ====================
    CONFETTI
-====================== */
+==================== */
 
 .confetti{
     position:fixed;
@@ -268,8 +251,8 @@ body{
 
         <div class="trex-wrapper">
             <img
-                src="https://pic.funnygifsbox.com/uploads/2020/06/funnygifsbox.com-2020-06-19-08-13-29-16.gif"
-                class="trex-gif">
+            src="https://pic.funnygifsbox.com/uploads/2020/06/funnygifsbox.com-2020-06-19-08-13-29-16.gif"
+            class="trex-gif">
         </div>
 
         <h2 class="title">
@@ -317,17 +300,16 @@ body{
         <div class="hi-wrapper">
 
             <img
-                src="IMG_8875.GIF"
-                alt="Hi GIF"
-                class="hi-gif">
+            src="IMG_8875.GIF"
+            class="hi-gif">
 
             <h1 class="hi-text">
                 hi, how are you 👋🏻
             </h1>
 
             <button
-                class="tap-btn"
-                onclick="openBirthday()">
+            class="tap-btn"
+            onclick="openBirthday()">
                 tap disinii
             </button>
 
@@ -337,7 +319,8 @@ body{
 
     <!-- BIRTHDAY PAGE -->
 
-    <div id="birthdayPage" class="birthday hidden">
+    <div id="birthdayPage"
+    class="birthday hidden">
 
         <div class="cake">🎂</div>
 
@@ -366,17 +349,28 @@ body{
 
 const correctPin = "260710";
 let inputPin = "";
+let wrongAttempt = 0;
+
+const messages = [
+    "APAA HAYOO 😑",
+    "ngetik yg bener cil",
+    "😏",
+    "Lio bilek : 😡"
+];
 
 function updateDots(){
 
-    const dots = document.querySelectorAll(".dot");
+    const dots =
+    document.querySelectorAll(".dot");
 
     dots.forEach((dot,index)=>{
+
         if(index < inputPin.length){
             dot.classList.add("filled");
         }else{
             dot.classList.remove("filled");
         }
+
     });
 
 }
@@ -395,7 +389,9 @@ function addNumber(num){
 
             if(inputPin === correctPin){
 
-                document.getElementById("pinPage").classList.add("hidden");
+                document
+                .getElementById("pinPage")
+                .classList.add("hidden");
 
                 const hiPage =
                 document.getElementById("hiPage");
@@ -405,23 +401,16 @@ function addNumber(num){
 
             }else{
 
-                const messages = [
-    "APAA HAYOO 😑",
-    "ngetik yg bener cil",
-    "😏",
-    "Lio bilek : 😡"
-];
+                alert(messages[wrongAttempt]);
 
-alert(messages[wrongAttempt]);
+                wrongAttempt++;
 
-wrongAttempt++;
+                if(wrongAttempt >= messages.length){
+                    wrongAttempt = 0;
+                }
 
-if(wrongAttempt >= messages.length){
-    wrongAttempt = 0;
-}
-
-inputPin = "";
-updateDots();
+                inputPin = "";
+                updateDots();
 
             }
 
@@ -433,7 +422,8 @@ updateDots();
 
 function removeNumber(){
 
-    inputPin = inputPin.slice(0,-1);
+    inputPin =
+    inputPin.slice(0,-1);
 
     updateDots();
 
